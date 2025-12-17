@@ -1,0 +1,9 @@
+﻿namespace Kaira.WebUI.DTOs.CategoryDtos
+{
+    public class ResultCategoryDto
+    {
+        public int CategoryId { get; set; }
+        public string Name { get; set; }
+        public string CategoryImage { get; set; }
+    }
+}

@@ -1,0 +1,17 @@
+﻿@model CreateTestimonialDto
+@{
+    ViewData["Title"] = "CreateTestimonial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yeni Yorum Oluştur</h1>
+
+<form method="post">
+    <label>Başlık</label>
+    <input type="text" asp-for="NameSurname" class="form-control" placeholder="Başlık" />
+    <br />
+    <label>Yorum</label>
+    <input type="text" asp-for="Comment" class="form-control" placeholder="Yorum" />
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>

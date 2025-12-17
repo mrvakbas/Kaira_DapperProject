@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ResultCollectionDto>
+
+<section class="collection bg-light position-relative py-5">
+    <div class="container">
+        <div class="row">
+            <div class="title-xlarge text-uppercase txt-fx domino">Koleksiyon</div>
+            <div class="collection-item d-flex flex-wrap my-5">
+                <div class="col-md-6 column-container">
+                    <div class="image-holder">
+                        <img src="/kaira-1.0.0/images/single-image-2.jpg" alt="collection" class="product-image img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-6 column-container bg-white">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="collection-content m-0 m-md-4">
+                            <h5 class="element-title text-uppercase">@item.Title</h5>
+                            <p>
+                                @item.Description
+                            </p>
+                            <a href="#" class="btn btn-dark text-uppercase">Koleksiyonu İncele</a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

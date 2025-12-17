@@ -1,0 +1,17 @@
+﻿@model CreateCategoryDto
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yeni Kategori Oluştur</h1>
+
+<form method="post">
+    <label>Kategori Adı</label>
+    <input type="text" asp-for="Name" class="form-control" placeholder="Kategori Adı" />
+    <br />
+    <label>Kategori Resmi</label>
+    <input type="text" asp-for="CategoryImage" class="form-control" placeholder="Kategori Adı" />
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>

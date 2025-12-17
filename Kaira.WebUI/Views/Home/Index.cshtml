@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@await Component.InvokeAsync("_BilboardSectionComponentPartial")
+
+@await Component.InvokeAsync("_FeatureSectionComponentPartial")
+
+@await Component.InvokeAsync("_CategoriesSectionComponentPartial")
+
+@await Component.InvokeAsync("_NewProductSectionComponentPartial")
+
+@await Component.InvokeAsync("_CollectionSectionComponentPartial")
+
+@await Component.InvokeAsync("_SellingProductSectionComponentPartial")
+
+@await Component.InvokeAsync("_VideoSectionComponentPartial")
+
+@await Component.InvokeAsync("_TestimonialsSectionComponentPartial")
+
+@await Component.InvokeAsync("_RelatedProductSectionComponentPartial")
+
+@await Component.InvokeAsync("_BrandLogoSectionComponentPartial")
+
+<section class="newsletter bg-light" style="background: url(/kaira-1.0.0/images/pattern-bg.png) no-repeat;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 py-5 my-5">
+                <div class="subscribe-header text-center pb-3">
+                    <h3 class="section-title text-uppercase">Yapay Zeka Stilistine Danış</h3>
+                    <p>Gitmek istediğin yeri veya elindeki kıyafeti yaz, sana özel kombin yapalım!</p>
+                </div>
+
+                <form id="aiStyleForm" class="d-flex flex-wrap gap-2">
+
+                    <input type="text" id="userPrompt" name="userPrompt" placeholder="Örn: Bugün ne giymeliyim?" class="form-control form-control-lg" required>
+
+                    <button type="submit" id="btnGonder" class="btn btn-dark btn-lg text-uppercase w-100">
+                        <span id="btnText">Kombin Önerisi Al</span>
+                        <span id="loadingSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none;"></span>
+                    </button>
+                </form>
+                <div id="successBox" class="alert alert-success mt-4" role="alert" style="display:none;">
+                    <h4 class="alert-heading">✨ İşte Senin İçin Seçimim!</h4>
+                    <hr>
+                    <p id="aiResponseText" style="white-space: pre-wrap;"></p>
+                </div>
+
+                <div id="errorBox" class="alert alert-warning mt-4" style="display:none;">
+                    <span id="errorMessage"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("_InstagramSectionComponentPartial")
+
+<script>
+    document.getElementById('aiStyleForm').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Sayfanın yenilenmesini engeller
+
+        // Elementleri seç
+        const promptInput = document.getElementById('userPrompt');
+        const btnGonder = document.getElementById('btnGonder');
+        const btnText = document.getElementById('btnText');
+        const spinner = document.getElementById('loadingSpinner');
+        const successBox = document.getElementById('successBox');
+        const aiResponseText = document.getElementById('aiResponseText');
+        const errorBox = document.getElementById('errorBox');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Kullanıcı girdisi boş mu kontrol et
+        if (!promptInput.value.trim()) return;
+
+        // UI'ı "Yükleniyor" moduna al
+        btnGonder.disabled = true;
+        btnText.innerText = "Stilist Düşünüyor...";
+        spinner.style.display = "inline-block";
+
+        // Önceki sonuçları gizle
+        successBox.style.display = "none";
+        errorBox.style.display = "none";
+
+        try {
+            // Veriyi hazırla
+            const formData = new FormData();
+            formData.append('userPrompt', promptInput.value);
+
+            // Arka plana isteği at (Controller'daki metoda)
+            const response = await fetch('/Home/GetKombinOnerisi', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json(); // JSON cevabını oku
+
+                if (data.success) {
+                    // Başarılıysa sonucu yazdır
+                    aiResponseText.innerText = data.message;
+                    successBox.style.display = "block";
+                } else {
+                    // Controller'dan success:false geldiyse hata göster
+                    errorMessage.innerText = data.message;
+                    errorBox.style.display = "block";
+                }
+            } else {
+                throw new Error("Sunucu hatası.");
+            }
+
+        } catch (error) {
+            console.error(error);
+            errorMessage.innerText = "Bir bağlantı hatası oluştu. Lütfen tekrar dene.";
+            errorBox.style.display = "block";
+        } finally {
+            // İşlem bitince butonu eski haline getir
+            btnGonder.disabled = false;
+            btnText.innerText = "Kombin Önerisi Al";
+            spinner.style.display = "none";
+        }
+    });
+</script>

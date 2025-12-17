@@ -1,0 +1,21 @@
+﻿@model UpdateNewProductDto
+@{
+    ViewData["Title"] = "UpdateNewProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Yeni Ürün Güncelle</h3>
+
+<form method="post">
+    <input type="hidden" asp-for="NewProductId" />
+    <label>Ürün Adı</label>
+    <input type="text" asp-for="Name" class="form-control" required />
+    <br />
+    <label>Görsel Url</label>
+    <input type="text" asp-for="ImageUrl" class="form-control" required />
+    <br />
+    <label>Fiyat</label>
+    <input type="number" asp-for="Price" class="form-control" required />
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>

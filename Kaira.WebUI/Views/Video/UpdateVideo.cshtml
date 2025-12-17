@@ -1,0 +1,19 @@
+﻿@model UpdateVideoDto
+@{
+    ViewData["Title"] = "UpdateVideo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Video Güncelle</h1>
+
+<form method="post">
+
+    <input type="hidden" asp-for="VideoId" />
+    <label>Video Url</label>
+    <input type="text" asp-for="Url" class="form-control" placeholder="Video Url" />
+    <br />
+    <label>Arka Plan Resmi</label>
+    <input type="text" asp-for="BackgroundImageUrl" class="form-control" placeholder="Arka Plan Resmi" />
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>

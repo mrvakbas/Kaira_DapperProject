@@ -1,0 +1,18 @@
+﻿@model UpdateTestimonialDto
+@{
+    ViewData["Title"] = "UpdateTestimonial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yorum Güncelle</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="TestimonialId" />
+    <label>Başlık</label>
+    <input type="text" asp-for="NameSurname" class="form-control" placeholder="Başlık" />
+    <br />
+    <label>Yorum</label>
+    <input type="text" asp-for="Comment" class="form-control" placeholder="Yorum" />
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ResultBrandDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Markalar</h3>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>#</th>
+        <th>Logo</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.BrandId</th>
+            <td> <img src="@item.BrandImage" style="height:50px;"  /> </td>
+            <td>
+                <a href="/Brand/DeleteBrand/@item.BrandId" class="btn btn-danger">Sil</a>
+                <a href="/Brand/UpdateBrand/@item.BrandId" class="btn btn-info">Güncelle</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="/Brand/CreateBrand" class="btn btn-info">Yeni Marka Oluştur</a>

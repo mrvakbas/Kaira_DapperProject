@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ResultBrandDto>
+<section class="logo-bar py-5 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="logo-content d-flex flex-wrap justify-content-between">
+                @foreach (var item in Model)
+                {
+                    <img src="@item.BrandImage" alt="logo" class="logo-image img-fluid">
+                }
+            </div>
+        </div>
+    </div>
+</section>

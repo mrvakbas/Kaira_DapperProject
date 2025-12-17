@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ResultVideoDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Video</h3>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>#</th>
+        <th>Video Url</th>
+        <th>Arka Plan Resmi</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.VideoId</th>
+            <td>@item.Url</td>
+            <td>@item.BackgroundImageUrl</td>
+            <td>
+                <a href="/Video/DeleteVideo/@item.VideoId" class="btn btn-danger">Sil</a>
+                <a href="/Video/UpdateVideo/@item.VideoId" class="btn btn-info">Güncelle</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="/Video/CreateVideo" class="btn btn-info">Yeni Video Oluştur</a>

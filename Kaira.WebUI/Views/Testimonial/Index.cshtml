@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ResultTestimonialDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Yorumlar</h3>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>#</th>
+        <th>Başlık</th>
+        <th>Yorum</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.TestimonialId</th>
+            <td>@item.NameSurname</td>
+            <td>@item.Comment</td>
+            <td>
+                <a href="/Testimonial/DeleteTestimonial/@item.TestimonialId" class="btn btn-danger">Sil</a>
+                <a href="/Testimonial/UpdateTestimonial/@item.TestimonialId" class="btn btn-info">Güncelle</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="/Testimonial/CreateTestimonial" class="btn btn-info">Yeni Yorum Oluştur</a>
